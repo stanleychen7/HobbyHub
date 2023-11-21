@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { useRoutes, Link } from 'react-router-dom';
 import CreatePost from './pages/CreatePost';
 import ShowPost from './pages/ShowPost';
+import UpdatePost from './pages/UpdatePost';
+import PostInfo from './pages/PostInfo';
+import Search from './components/search';
 
 const App = () => {
   const [post, setPost] = useState([]);
 
-  // Function to add a new Crewmate to the crewmate state
   const addPost = (newPost) => {
     setPost([...post, newPost]);
   };
@@ -21,6 +23,14 @@ const App = () => {
     {
       path:"/",
       element: <ShowPost/>
+    },
+    {
+      path:"/update/:id",
+      element:<UpdatePost/>
+    },
+    {
+      path:"/info/:id",
+      element:<PostInfo/>
     }
 
   ]);
@@ -29,6 +39,7 @@ const App = () => {
     <div className="App">
       <div className="header">
         <h1>CarHub</h1>
+        <Search/>
         <Link to="/"><button className="headerBtn"> Gallery </button></Link>
         <Link to="/new"><button className="headerBtn"> Create Post </button></Link>
       </div>

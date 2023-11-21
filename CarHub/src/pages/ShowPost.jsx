@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import Vote from "../components/vote";
 import { supabase } from "../client";
 import { formatDistanceToNow } from "date-fns";
 
@@ -12,7 +11,8 @@ const ShowPost = () => {
             try {
                 const { data, error } = await supabase
                     .from('Forum')
-                    .select();
+                    .select()
+                    .order('created_at', { ascending: false });
 
                 if (error) {
                     console.error("Error fetching posts:", error);
@@ -40,7 +40,7 @@ const ShowPost = () => {
                         id={singlePost.id}
                         title={singlePost.title}
                         time_created={timeAgo(singlePost.created_at)}
-                        upvotes = {singlePost.upvotes}
+                        votes = {singlePost.votes}
                     />
                 ))
             ) : (
